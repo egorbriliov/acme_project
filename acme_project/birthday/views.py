@@ -5,9 +5,10 @@ from .utils import calculate_birthday_countdown
 
 
 def birthday(request):
-    form = BirthdayForm(request.GET or None)
-    context: dict[str, BirthdayForm | int] = {'form': form}
+    form: BirthdayForm = BirthdayForm(request.POST or None)
+    context: dict[str, BirthdayForm] = {'form': form}
     if form.is_valid():
+        form.save()
         birthday_countdown: int = calculate_birthday_countdown(
             form.cleaned_data['birthday']
         )

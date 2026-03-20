@@ -17,7 +17,8 @@ def get_birthday_for_year(birthday: date, year) -> date:
     except ValueError:
         # В этом случае устанавливаем ДР 1 марта.
         calculated_birthday: date = date(year=year, month=3, day=1)
-    return calculated_birthday 
+    return calculated_birthday
+
 
 def calculate_birthday_countdown(birthday):
     """
@@ -41,4 +42,3 @@ def calculate_birthday_countdown(birthday):
     # Считаем разницу между следующим днём рождения и сегодняшним днём в днях.
     birthday_countdown: int = (next_birthday - today).days
     return birthday_countdown
-
