@@ -5,13 +5,13 @@ from .models import Birthday
 from .utils import calculate_birthday_countdown
 
 
-def birthday(request, pk):
+def birthday(request, pk=None):
     if pk is not None:
         instance = get_object_or_404(Birthday, pk=pk)
     else:
         instance = None
     form: BirthdayForm = BirthdayForm(request.POST or None, instance=instance)
-    context: dict[str, BirthdayForm] = {'form': form}
+    context: dict[str, BirthdayForm | int] = {'form': form}
     if form.is_valid():
         form.save()
         birthday_countdown: int = calculate_birthday_countdown(
