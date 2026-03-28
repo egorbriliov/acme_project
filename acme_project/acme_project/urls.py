@@ -6,6 +6,7 @@ from django.urls import include, path, reverse_lazy
 
 from users.forms import CustomUserCreationForm
 
+handler404 = 'core.views.page_not_found'
 
 urlpatterns = [
     path('', include('pages.urls')),
