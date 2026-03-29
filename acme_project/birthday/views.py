@@ -12,7 +12,6 @@ from .utils import calculate_birthday_countdown
 
 class OnlyAuthorMixin(UserPassesTestMixin):
     model = Birthday
-    form_class = BirthdayForm
 
     # Определяем метод test_func() для миксина UserPassesTestMixin:
     def test_func(self):
@@ -42,7 +41,7 @@ class BirthdayCreateView(LoginRequiredMixin, CreateView):
 
 
 class BirthdayUpdateView(OnlyAuthorMixin, UpdateView):
-    ...
+    form_class = BirthdayForm
 
 
 class BirthdayDeleteView(OnlyAuthorMixin, DeleteView):
