@@ -22,4 +22,13 @@ urlpatterns = [
         ),
         name='registration'
     ),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+
+if settings.DEBUG:
+    from debug_toolbar.toolbar import debug_toolbar_urls
+    # Добавить к списку urlpatterns список адресов из приложения debug_toolbar:
+    urlpatterns += debug_toolbar_urls()
+
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
