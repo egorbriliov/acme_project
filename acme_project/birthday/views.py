@@ -23,12 +23,6 @@ class OnlyAuthorMixin(UserPassesTestMixin):
         return object.author == self.request.user  # type: ignore
 
 
-class BirthdayListView(ListView):
-    model = Birthday
-    ordering = 'id'
-    paginate_by = 10
-
-
 class BirthdayCreateView(LoginRequiredMixin, CreateView):
     model = Birthday
     form_class = BirthdayForm
@@ -87,3 +81,11 @@ class CongratulationCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('birthday:detail',
                        kwargs={'pk': self.birthday.pk})  # type: ignore
+
+
+class BirthdayListView(ListView):
+    model = Birthday
+    queryset = Birthday.objects.prefetch_related(
+        'tags').select_related('author')
+    ordering = 'id'
+    paginate_by = 10
